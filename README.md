@@ -1,6 +1,3 @@
-# islas-calor-guatemala
-Caracterización de islas de calor superficial en las zonas 1, 4, 9 y 10 de Ciudad de Guatemala mediante teledetección
-
 # Islas de calor urbano superficial en Ciudad de Guatemala
 
 **Caracterización de islas de calor superficial en las zonas 1, 4, 9 y 10 de Ciudad de Guatemala mediante teledetección satelital: relación con la cobertura vegetal (NDVI) y la contaminación atmosférica, 2024–2025.**
