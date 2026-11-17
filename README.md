@@ -48,23 +48,24 @@ Identificar y caracterizar las islas de calor urbano superficial (ICU) en el ár
 | NO₂ troposférico, CO | Sentinel-5P/TROPOMI L3 (ESA/Copernicus) | ≈ 3.5 × 5.5 km | Google Earth Engine |
 | PM₂.₅ | MERRA-2 M2T1NXAER (NASA GMAO) | ≈ 50 × 60 km | Google Earth Engine |
 | Temperatura del aire, humedad relativa, viento | ERA5-Land mensual (ECMWF/Copernicus) | ≈ 11 km | Google Earth Engine |
-| Límites de zonas | Municipalidad de Guatemala | Vectorial | — |
+| Límites de zonas | Municipalidad de Guatemala | Vectorial | QGIS |
 
 El PM₂.₅ se calcula a partir de los componentes de aerosoles de MERRA-2 con la fórmula estándar
 `PM2.5 = DUST2.5 + SS2.5 + BC + 1.4·OC + 1.375·SO4` (Buchard et al., 2016).
 
 ## Flujo de trabajo
 
-```
-1. LST estacional (GEE)  ──►  2. Clases ICU (μ ± σ)  ──►  3. Autocorrelación espacial
-   Landsat 8/9, mediana         Fría / Templada /           Moran's I global, LISA,
-   por época                    Cálida / Muy cálida         Getis-Ord Gi*
-                                                                 │
-4. Variables explicativas (GEE)  ──►  5. Correlaciones  ──►  6. Regresión
-   NDVI, NDBI (malla 100 m)            Pearson y Spearman      OLS + MGWR
-   NO₂, CO, PM₂.₅, ERA5 (mensual)      celda y zona × mes          │
-                                                                 ▼
-                                                         7. Cartografía temática
+```mermaid
+flowchart TD
+    A["1. LST estacional<br/>Landsat 8/9 · mediana por época (GEE)"]
+    B["2. Clases ICU<br/>Fría · Templada · Cálida · Muy cálida (μ ± σ)"]
+    C["3. Autocorrelación espacial<br/>Moran's I global · LISA · Getis-Ord Gi*"]
+    D["4. Variables explicativas (GEE)<br/>NDVI y NDBI en malla de 100 m<br/>NO₂, CO, PM₂.₅ y ERA5-Land mensuales"]
+    E["5. Correlaciones<br/>Pearson y Spearman · celda y zona × mes"]
+    F["6. Regresión<br/>OLS → MGWR"]
+    G["7. Cartografía temática<br/>16 mapas a escala 1:50 000"]
+
+    A --> B --> C --> D --> E --> F --> G
 ```
 
 | Paso | Script | Qué hace |
@@ -151,7 +152,7 @@ Cada script indica al inicio sus entradas, parámetros y salidas.
 
 ## Cómo citar
 
-> Cordón Arias, J. (2026). *Islas de calor urbano superficial en Ciudad de Guatemala: scripts y resultados* [Repositorio de código]. GitHub. https://github.com/USUARIO/islas-calor-guatemala
+> Cordón, J. (2026). *Islas de calor urbano superficial en Ciudad de Guatemala: scripts y resultados* [Repositorio de código]. GitHub. https://github.com/USUARIO/islas-calor-guatemala
 
 ### Referencias de los métodos
 
